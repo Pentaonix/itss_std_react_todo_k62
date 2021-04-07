@@ -4,20 +4,21 @@
 　・チェックボックスにチェックが入っているか管理する
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
-import React, {useState} from "react";
-function TodoItem( props ) {
-  
-  const [clicked, setclicked] = React.useState(false);
-  
-  const handleClick = () => {
-    setclicked(!clicked);
+function TodoItem( {item, onCheck} ) {
+  const handleChange = () => {
+    onCheck(item);
   }
   return (
-    <label className= {clicked ? "panel-block has-text-grey-light" : "panel-block"}>
-      <input onClick={() => handleClick()} type="checkbox" />
-      {props.quang.text}
+    <label className="panel-block">
+      <input
+        type="checkbox"
+        checked={item.done}
+        onChange={handleChange}
+      />
+      <span className={item.done ? 'has-text-grey-light' : ''}>
+        {item.text}
+      </span>
     </label>
   );
 }
-
 export default TodoItem;
